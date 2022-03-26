@@ -1,19 +1,17 @@
-.is-centered{
+.input{
     text-align: center;
+    width: 200px;
+    margin: 0 auto;
 }
 #match{
     margin-top: 20px;
+    padding-left: 15px;
     text-align: center;
     max-height: 200px;
     display: block;
-    overflow: scroll;
-    overflow-x: hidden;
+    overflow-y: scroll;;
 }
-.input{
-    width: 200px;
-    text-align: center;
-    margin: 0 auto;
-}
+
 .button{
     display: block;
     margin: 0 auto;

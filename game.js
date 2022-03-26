@@ -11,6 +11,10 @@ $(document).ready(function() {
             const regex = new RegExp(`^${searchText}`, 'gi');
             return player.name.match(regex) 
         });
+        if(searchText.length === 0) {
+            matches = []
+            match
+        }
         outputHtml(matches);
     }
     const outputHtml = matches => {
