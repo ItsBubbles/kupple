@@ -11,9 +11,16 @@
     display: block;
     overflow-y: scroll;;
 }
-
 .button{
     display: block;
     margin: 0 auto;
     width:200px;
+}
+.tableDiv{
+    display: flex;
+    justify-content: center;
+}
+.gameTable{
+    width: 500px;
+    height: 600px;
 }
