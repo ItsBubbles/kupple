@@ -1,6 +1,12 @@
 const search = document.getElementById('search');
 const match = document.getElementById('match');
 
+
+function get_player_data(json) {
+    // console.log(json)
+    return
+}
+
 $(document).ready(function() {
 
     const searchStates = async searchText => {
@@ -27,6 +33,15 @@ $(document).ready(function() {
         }
     }
     search.addEventListener('input', () => searchStates(search.value));
+    
+    fetch("players.json")
+    
+      .then(response => response.json())
+      .then(json => get_player_data(json))
+
+    fetch("http://127.0.0.1:8000/")
+        .then(response => response.json())
+        .then(json => console.log(json))
 });
 
 
