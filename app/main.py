@@ -1,8 +1,8 @@
 import string
-from fastapi import FastAPI, Response
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.helpers import Player, answer, random_player, read_players, compare_player
+from app.helpers import Player, answer, random_player, read_players
 
 origins = [
     "http://127.0.0.1:5500"
@@ -27,7 +27,8 @@ async def get_players_route():
 
 @app.post("/compare")
 async def compare_player_route(player: Player):
-    results = compare_player(player, answer)
+    # passing 'answer' from helpers, will be refactored to an individual's session
+    results = player.compare_(answer)
     return results
 
 # secret
