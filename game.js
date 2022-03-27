@@ -49,10 +49,6 @@ function get_player_data(json) {
     return
 }
 
-// sample call, need to POST index of player from JSON
-// fetch("http://127.0.0.1:8000/answer")
-//     .then(response => response.json())
-//     .then(json => json)
 
 fetch("http://127.0.0.1:8000/")
     .then(response => response.json())

@@ -1,9 +1,8 @@
 import string
 from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
 
-from helpers import random_player, read_players
+from app.helpers import Player, answer, random_player, read_players, compare_player
 
 origins = [
     "http://127.0.0.1:5500"
@@ -19,24 +18,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-player = random_player()
-class Player(BaseModel):
-    name: str
-    pos: str
-    age: int
-    height: str
-    team: str
-    number: str
-    div: str
-    conf: str
+# temporary until "sessions" (cookies?) are implemeneted
+print(f"The current global answer to the puzzle is {answer}!")
 
 @app.get("/")
 async def get_players_route():
     return read_players()
 
 @app.post("/compare")
-async def compare_player(player: Player):
-    return player
+async def compare_player_route(player: Player):
+    results = compare_player(player, answer)
+    return results
 
 # secret
 @app.get("/answer")
