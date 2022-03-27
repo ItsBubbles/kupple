@@ -4,8 +4,19 @@ const match = document.getElementById('match');
 var guess;
 var data = [];
 
-function userInput(playerId){
-    console.log(playerId)
+function userInput(playerId){ 
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify(data[0][playerId]),
+        redirect: 'follow'
+      };
+    fetch("http://127.0.0.1:8000/compare", requestOptions)
+        .then(response => response.text())         
+        .then(data => console.log(data))
 }
 
 const searchStates = async searchText => {

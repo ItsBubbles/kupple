@@ -1,5 +1,7 @@
-from fastapi import FastAPI
+import string
+from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 from helpers import random_player, read_players
 
@@ -18,15 +20,23 @@ app.add_middleware(
 )
 
 player = random_player()
+class Player(BaseModel):
+    name: str
+    pos: str
+    age: int
+    height: str
+    team: str
+    number: str
+    div: str
+    conf: str
 
 @app.get("/")
 async def get_players_route():
     return read_players()
 
-@app.post("/")
-async def compare_player():
-    ...
-
+@app.post("/compare")
+async def compare_player(player: Player):
+    return player
 
 # secret
 @app.get("/answer")
