@@ -20,7 +20,13 @@
     display: flex;
     justify-content: center;
 }
-.gameTable{
-    width: 500px;
-    height: 600px;
+#tableHeader{
+    height: 50px;
 }
+#gameTable{
+    width: 600px;;
+    height: 100px;
+}
+/* #playerRow{
+    font-weight: bold;
+} */

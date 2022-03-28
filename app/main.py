@@ -28,8 +28,13 @@ async def get_players_route():
 @app.post("/compare")
 async def compare_player_route(player: Player):
     # passing 'answer' from helpers, will be refactored to an individual's session
+    
     results = player.compare_(answer)
-    return results
+    returnDict = {
+        "results": results,
+        "player": player
+    }
+    return returnDict
 
 # secret
 @app.get("/answer")
