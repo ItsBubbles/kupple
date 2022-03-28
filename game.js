@@ -24,9 +24,6 @@ var app = Vue.createApp({
 
 var data = [];
 var guess;
-var redResult="has-background-danger-dark has-text-primary-light has-text-weight-bold"
-var greenResult="has-background-success has-text-primary-light has-text-weight-bold"
-var yellowResult="has-background-warning has-text-black-bis has-text-weight-bold"
 
 function userInput(playerId){ 
     var myHeaders = new Headers();
