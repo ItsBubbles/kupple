@@ -1,8 +1,32 @@
 const search = document.getElementById('search');
 const match = document.getElementById('match');
+var app = Vue.createApp({
+    data(){
+        return {
+            players: []
+        }
+    },
+    methods: {
+        addNewPlay(player){
+            this.players.push(player)
+        },
+        getColor(player){
+            if(player == "Tom Brady"){
+                return redResult
+            }
+            else{
+                return greenResult
+            }
+        }
+    }
+        
+}).mount('.tableDiv')
 
-var guess;
 var data = [];
+var guess;
+var redResult="has-background-danger-dark has-text-primary-light has-text-weight-bold"
+var greenResult="has-background-success has-text-primary-light has-text-weight-bold"
+var yellowResult="has-background-warning has-text-black-bis has-text-weight-bold"
 
 function userInput(playerId){ 
     var myHeaders = new Headers();
@@ -12,11 +36,15 @@ function userInput(playerId){
         method: 'POST',
         headers: myHeaders,
         body: JSON.stringify(data[0][playerId]),
-        redirect: 'follow'
+        redirect: 'follow'  
       };
     fetch("http://127.0.0.1:8000/compare", requestOptions)
         .then(response => response.text())         
-        .then(data => console.log(data))
+        .then(data =>{
+            newData = JSON.parse(data)
+            app.addNewPlay(newData.player)
+            console.log(newData.results)
+        })         
 }
 
 const searchStates = async searchText => {
@@ -35,6 +63,7 @@ const outputHtml = matches => {
 
         const html = matches.map(match => `
             <button class=button id=${data[0].indexOf(match)} onClick=userInput(this.id)>${match.name}</button>
+            
             
         `).join('');
         match.innerHTML = html;
