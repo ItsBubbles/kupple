@@ -29,6 +29,7 @@
 }
 #playerName{
     width: 150px;
+    font-weight: bold;
 }
 
 #arrowClass{
