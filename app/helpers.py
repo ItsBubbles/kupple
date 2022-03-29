@@ -16,19 +16,20 @@ class Player(BaseModel):
     
     def compare_(self, answer):
         cmp_arr = []
-
+        player_attr = ["pos", "div", "conf", "age", "height", "number"]
         # go through each attribute used for comparison (Team, Div, Pos, Ht, Age, Jersey#)
         cmp_arr.append(bool(self.pos == answer.pos))
+        cmp_arr.append(bool(self.div == answer.div))
+        cmp_arr.append(bool(self.conf == answer.conf))
         cmp_arr.append(answer.age - self.age)
         cmp_arr.append(int(answer.height) - int(self.height))
         cmp_arr.append(int(answer.number) - int(self.number))
-        cmp_arr.append(bool(self.conf == answer.conf))
-        cmp_arr.append(bool(self.div == answer.div))
 
         res_arr = []
+        res_dict = {}
 
         for res in cmp_arr:
-            
+            i = cmp_arr.index(res)
             type_ = f"{type(res)}"
 
             print(type_)
@@ -38,7 +39,7 @@ class Player(BaseModel):
                     if res: res_arr.append("has-background-success has-text-primary-light has-text-weight-bold")
                     else: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold")
 
-                # first two array elements are for table data: <td class=res_arr[:2]>, third is for arrow div: <div class=res_arr[2]>
+                # first 3 array elements are for table data: <td class=res_arr[:3]>, third is for arrow div: <div class=res_arr[3]>
                 case "<class 'int'>":
                     if res==0: res_arr.append("has-background-success has-text-primary-light has-text-weight-bold")
 
@@ -47,8 +48,13 @@ class Player(BaseModel):
 
                     elif res<0 and res>-5: res_arr.append("has-background-warning has-text-black-bis has-text-weight-bold triangle_down")
                     elif res<0 and res<-5: res_arr.append("has-background-danger has-text-black-bis has-text-weight-bold triangle_down")
+        
+            res_dict[player_attr[i]] = [res_arr[i]]
 
-        return res_arr
+        print(res_arr)
+        print(res_dict)
+
+        return res_dict
 
 def read_players() -> list:
     with open("app/players.json", "r") as f:
