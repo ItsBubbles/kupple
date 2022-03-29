@@ -1,6 +1,5 @@
 const search = document.getElementById('search');
 const match = document.getElementById('match');
-const test = document.getElementById('playerPos0')
 var count=0
 var app = Vue.createApp({
     data(){
@@ -12,9 +11,19 @@ var app = Vue.createApp({
     methods: {
         addNewPlay(player, playerResults){
             this.players.push(player)
-            for(i=0; i<playerResults.age.length; i++){
-              test.classList.add(playerResults.age[0][i])
+            cssClasses = playerResults.age[0].split(" ")
+
+            let playerAttr = ["Pos", "Div", "Age", "Height", "Number"]
+            for(i=0; i<playerAttr.length; i++) {
+                elem = "player"+playerAttr[i]+this.players.indexOf(player)
+                const test = document.getElementById(elem)
+                console.log(test)
+
+                test.className += cssClasses[0]
+                test.className += " " + cssClasses[1]
+                test.className += " " + cssClasses[2]
             }
+            
         },
         playerPos(number){
             console.log(number)

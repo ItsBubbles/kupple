@@ -28,14 +28,14 @@
                     <th>Height</th>
                     <th>Number</th>
                 </tr>
-                <tr v-for="player in players" id="{{players.length}}">
-                    <td :class="">{{player.name}}</td>
-                    <td :class="">{{player.team}}</td>
-                    <td id="playerPos0">{{player.pos}}</td>
-                    <td :class="">{{player.div}}</td>
-                    <td :class="">{{player.age}}<div class=""></div></td>
-                    <td :class="">{{player.height}}<div class=""></div></td>
-                    <td :class="">{{player.number}}<div class=""></div></td>
+                <tr v-for="player in players" v-bind:id="players.indexOf(player)">
+                    <td v-bind:id="'playerName'+players.indexOf(player)">{{player.name}}</td>
+                    <td v-bind:id="'playerTeam'+players.indexOf(player)">{{player.team}}</td>
+                    <td v-bind:id="'playerPos'+players.indexOf(player)">{{player.pos}}</td>
+                    <td v-bind:id="'playerDiv'+players.indexOf(player)">{{player.div}}</td>
+                    <td v-bind:id="'playerAge'+players.indexOf(player)">{{player.age}}<div v-bind:id="'playerAgeArrow'+players.indexOf(player)"></div></td>
+                    <td v-bind:id="'playerHeight'+players.indexOf(player)">{{player.height}}<div v-bind:id="'playerAgeArrow'+players.indexOf(player)"></div></td>
+                    <td v-bind:id="'playerNumber'+players.indexOf(player)">{{player.number}}<div v-bind:id="'playerAgeArrow'+players.indexOf(player)"></div></td>
                 </tr>
     
             </table>
