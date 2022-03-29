@@ -56,7 +56,6 @@ var app = Vue.createApp({
             else{
                 playerClass.push("")
             }
-            playerClass.push(playerResults.nameClass)
             playerClass.push(playerResults.teamClass)
 
 
