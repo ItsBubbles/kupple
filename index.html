@@ -18,9 +18,6 @@
         <div id="match" class="block is-centered">
         </div>
         <div class="tableDiv">
-            <!-- <li v-for="player in players">
-                <p>{{player.name}}</p><br>
-            </li> -->
             <table class= "table table is-bordered" id="gameTable">
                 <tr id="tableHeader">
                     <th>Name</th>
@@ -32,15 +29,15 @@
                     <th>Number</th>
                 </tr>
                 <tr v-for="player in players" id="playerRow">
-                    <td :class="getColor(player.name)">{{player.name}}</td>
-                    <td>{{player.team}}</td>
-                    <td>{{player.pos}}</td>
-                    <td>{{player.div}}</td>
-                    <td>{{player.age}}</td>
-                    <td>{{player.height}}</td>
-                    <td>{{player.number}}</td>
+                    <td :class="getClass(player.name)">{{player.name}}</td>
+                    <td :class="">{{player.team}}</td>
+                    <td :class="">{{player.pos}}</td>
+                    <td :class="">{{player.div}}</td>
+                    <td :class="">{{player.age}}<div class=""></div></td>
+                    <td :class="">{{player.height}}<div class=""></div></td>
+                    <td :class="">{{player.number}}<div class=""></div></td>
                 </tr>
-                    
+    
             </table>
         </div>
     </div>
