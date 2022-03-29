@@ -20,22 +20,22 @@
         <div class="tableDiv">
             <table class= "table table is-bordered" id="gameTable">
                 <tr id="tableHeader">
-                    <th>Name</th>
+                    <th id="playerName">Name</th>
                     <th>Team</th>
                     <th>Position</th>
                     <th>Division</th>
-                    <th>Age</th>
-                    <th>Height</th>
-                    <th>Number</th>
+                    <th id="arrowClass">Age</th>
+                    <th id="arrowClass">Height</th>
+                    <th id="arrowClass">Number</th>
                 </tr>
-                <tr v-for="player in players" id="playerRow">
-                    <td :class="getClass(player.name)">{{player.name}}</td>
-                    <td :class="">{{player.team}}</td>
-                    <td :class="">{{player.pos}}</td>
-                    <td :class="">{{player.div}}</td>
-                    <td :class="">{{player.age}}<div class=""></div></td>
-                    <td :class="">{{player.height}}<div class=""></div></td>
-                    <td :class="">{{player.number}}<div class=""></div></td>
+                <tr v-for="player in players" v-bind:id="players.indexOf(player)">
+                    <td id="playerName" v-bind:class="">{{player[0].name}}</td>
+                    <td v-bind:class="player[9]">{{player[0].team}}</td>
+                    <td v-bind:class="player[1]">{{player[0].pos}}</td>
+                    <td v-bind:class="player[2]">{{player[0].div}}</td>
+                    <td v-bind:class="player[3]" id="arrowClass">{{player[0].age}}<div v-bind:class="player[4]"></div></td>
+                    <td v-bind:class="player[5]" id="arrowClass">{{player[0].height}}<div v-bind:class="player[6]"></div></td>
+                    <td v-bind:class="player[7]" id="arrowClass">{{player[0].number}}<div v-bind:class="player[8]"></div></td>
                 </tr>
     
             </table>
