@@ -20,13 +20,12 @@
     display: flex;
     justify-content: center;
 }
-#tableHeader{
-    height: 50px;
-}
 #gameTable{
-    height: 100px;
     border: 2px solid black;
     text-align: center;
+}
+#tableHeader{
+    height: 20px;
 }
 #playerName{
     width: 150px;
