@@ -28,10 +28,10 @@
                     <th>Height</th>
                     <th>Number</th>
                 </tr>
-                <tr v-for="player in players" id="playerRow">
-                    <td :class="getClass(player.name)">{{player.name}}</td>
+                <tr v-for="player in players" id="{{players.length}}">
+                    <td :class="">{{player.name}}</td>
                     <td :class="">{{player.team}}</td>
-                    <td :class="">{{player.pos}}</td>
+                    <td id="playerPos0">{{player.pos}}</td>
                     <td :class="">{{player.div}}</td>
                     <td :class="">{{player.age}}<div class=""></div></td>
                     <td :class="">{{player.height}}<div class=""></div></td>

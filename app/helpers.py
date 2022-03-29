@@ -49,9 +49,7 @@ class Player(BaseModel):
 
         for i in range(6):
             k = player_attr[i]
-            print(k)
             v = res_arr[i]
-            print(v)
             res_dict[k] = [v]
 
         print(res_dict)

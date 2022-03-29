@@ -1,25 +1,26 @@
 const search = document.getElementById('search');
 const match = document.getElementById('match');
+const test = document.getElementById('playerPos0')
+var count=0
 var app = Vue.createApp({
     data(){
         return {
-            players: []
+            players: [],
+            playerClass: []
         }
     },
     methods: {
-        addNewPlay(player){
+        addNewPlay(player, playerResults){
             this.players.push(player)
+            for(i=0; i<playerResults.age.length; i++){
+              test.classList.add(playerResults.age[0][i])
+            }
         },
-        getClass(player){
-            // if(player == "Tom Brady"){
-            //     return "redResult"
-            // }
-            // else{
-            //     return "greenResult"
-            // }
+        playerPos(number){
+            console.log(number)
+            // return this.playerClass[count].pos, count++;
         }
     }
-        
 }).mount('.tableDiv')
 
 var data = [];
@@ -39,17 +40,15 @@ function userInput(playerId){
         .then(response => response.text())         
         .then(data =>{
             newData = JSON.parse(data)
-            app.addNewPlay(newData.player)
-            // array of css classes
-            // need to iterate and assign classes to respective elements
-            console.log(newData.results)
+            app.addNewPlay(newData.player, newData.results)
         })         
 }
 
 const searchStates = async searchText => {
     let matches = data[0].filter(player => {
+        //regex for string is contained in a string 
         const regex = new RegExp(`${searchText}`, 'gi');
-        return player.name.match(regex)   
+        return player.name.match(regex) 
     });
     if(searchText.length === 0) {
         matches = []
@@ -62,6 +61,7 @@ const outputHtml = matches => {
 
         const html = matches.map(match => `
             <button class=button id=${data[0].indexOf(match)} onClick=userInput(this.id)>${match.name}</button>
+            
             
         `).join('');
         match.innerHTML = html;
