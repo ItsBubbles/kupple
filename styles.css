@@ -27,6 +27,29 @@
     width: 600px;;
     height: 100px;
 }
-/* #playerRow{
-    font-weight: bold;
-} */
+.triangle_down{
+    position: relative;
+    top: -5px;
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-right: 0.2em solid black;
+    border-top: 0.2em solid black;
+    transform: rotate(135deg);
+    margin-right: 0.5em;
+    margin-left: 1.0em;
+  }
+.triangle_up{
+    position: relative;
+    top: 5px;
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-right: 0.2em solid black;
+    border-top: 0.2em solid black;
+    transform: rotate(-45deg);
+    margin-right: 0.5em;
+    margin-left: 1.0em;
+}   
