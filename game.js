@@ -5,24 +5,64 @@ var app = Vue.createApp({
     data(){
         return {
             players: [],
-            playerClass: []
         }
     },
     methods: {
         addNewPlay(player, playerResults){
-            this.players.push(player)
-            cssClasses = playerResults.age[0].split(" ")
+            let playerClass = []
+            playerClass.push(player)
+            playerClass.push(playerResults.posClass)
+            playerClass.push(playerResults.divClass)
+            
+            // playerClass.push(player)
+            // playerClass.push(playerResults)
 
-            let playerAttr = ["Pos", "Div", "Age", "Height", "Number"]
-            for(i=0; i<playerAttr.length; i++) {
-                elem = "player"+playerAttr[i]+this.players.indexOf(player)
-                const test = document.getElementById(elem)
-                console.log(test)
+            let ageArrowString = playerResults.ageClass[0]
+            let ageArrowIndex = ageArrowString.lastIndexOf(" ")
+            let ageArrow = ageArrowString.split(" ").pop()
+            let ageArrowSubClass = ageArrowString.substring(0, ageArrowIndex)
 
-                test.className += cssClasses[0]
-                test.className += " " + cssClasses[1]
-                test.className += " " + cssClasses[2]
+
+            let heightArrowString = playerResults.heightClass[0]
+            let heightArrowIndex = heightArrowString.lastIndexOf(" ")
+            let heightArrow = heightArrowString.split(" ").pop()
+            let heightArrowSubClass = heightArrowString.substring(0, heightArrowIndex)
+
+            let numberArrowString = playerResults.numberClass[0]
+            let numberArrowIndex = numberArrowString.lastIndexOf(" ")
+            let numberArrow = numberArrowString.split(" ").pop()
+            let numberArrowSubClass = numberArrowString.substring(0, heightArrowIndex)
+            
+            
+            playerClass.push(ageArrowSubClass)
+            if (ageArrow == "triangle_up" || ageArrow == "triangle_down"){
+                playerClass.push(ageArrow)
             }
+            else{
+                playerClass.push("")
+            }
+
+            playerClass.push(heightArrowSubClass)
+            if(heightArrow == "triangle_up" || heightArrow == "triangle_down"){
+                playerClass.push(heightArrow)
+            }
+            else{
+                playerClass.push("")
+            }
+            playerClass.push(numberArrowSubClass)
+            if(numberArrow == "triangle_up" || numberArrow == "triangle_down"){
+                playerClass.push(numberArrow)
+            }
+            else{
+                playerClass.push("")
+            }
+            playerClass.push(playerResults.nameClass)
+            playerClass.push(playerResults.teamClass)
+
+
+            console.log(playerClass)
+            // console.log(playerResults.ageClass[0])
+            this.players.push(playerClass)
             
         },
         playerPos(number){

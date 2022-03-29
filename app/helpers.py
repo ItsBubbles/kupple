@@ -16,14 +16,17 @@ class Player(BaseModel):
     
     def compare_(self, answer) -> dict:
         cmp_arr = []
-        player_attr = ["pos", "div", "conf", "age", "height", "number"]
+        player_attr = ["posClass", "divClass", "confClass", "ageClass", "heightClass", "numberClass", "nameClass", "teamClass"]
         # go through each attribute used for comparison (Team, Div, Pos, Ht, Age, Jersey#)
+
         cmp_arr.append(bool(self.pos == answer.pos))
         cmp_arr.append(bool(self.div == answer.div))
         cmp_arr.append(bool(self.conf == answer.conf))
         cmp_arr.append(answer.age - self.age)
         cmp_arr.append(int(answer.height) - int(self.height))
         cmp_arr.append(int(answer.number) - int(self.number))
+        cmp_arr.append(bool(self.name == answer.name))
+        cmp_arr.append(bool(self.team == answer.team))
 
         res_arr = []
 
@@ -43,20 +46,19 @@ class Player(BaseModel):
                     elif res>0 and res<5: res_arr.append("has-background-warning has-text-black-bis has-text-weight-bold triangle_up")
 
                     elif res<0 and res>-5: res_arr.append("has-background-warning has-text-black-bis has-text-weight-bold triangle_down")
-                    elif res<0 and res<-5: res_arr.append("has-background-danger has-text-black-bis has-text-weight-bold triangle_down")
+                    elif res<0 and res<-5: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold triangle_down")
 
         res_dict = {}
 
-        for i in range(6):
+        for i in range(8):
             k = player_attr[i]
+            
             try:
                 v = res_arr[i]
             except IndexError:
                 print(f"Index {i} is out of range for an array of length {len(res_arr)}...\nArray: {res_arr}")
             res_dict[k] = [v]
-
         print(res_dict)
-
         return res_dict
 
 def read_players() -> list:
