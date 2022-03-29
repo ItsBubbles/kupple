@@ -9,7 +9,7 @@
     text-align: center;
     max-height: 200px;
     display: block;
-    overflow-y: scroll;;
+    overflow-y: scroll;
 }
 .button{
     display: block;
@@ -26,6 +26,9 @@
 #gameTable{
     width: 600px;;
     height: 100px;
+}
+#arrowClass{
+    width: 100px;
 }
 .triangle_down{
     position: relative;
