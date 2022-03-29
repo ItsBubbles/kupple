@@ -14,7 +14,7 @@ class Player(BaseModel):
     div: str
     conf: str
     
-    def compare_(self, answer):
+    def compare_(self, answer) -> dict:
         cmp_arr = []
         player_attr = ["pos", "div", "conf", "age", "height", "number"]
         # go through each attribute used for comparison (Team, Div, Pos, Ht, Age, Jersey#)
@@ -65,17 +65,9 @@ def read_players() -> list:
 
 players = read_players()
 
-def random_player():
+def random_player() -> Player:
     player = random.choice(players)
     player = namedtuple("Player", player.keys())(*player.values())
     return player
 
 answer = random_player()
-
-def compare_player(player, answer):
-    # if player.compare(answer):
-    #     return "Try again!"
-    if player != answer:
-        return "Try again!"
-    else: 
-        return player
