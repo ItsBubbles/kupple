@@ -35,17 +35,20 @@ class Player(BaseModel):
 
             match type_:
                 case "<class 'bool'>":
-                    if res: res_arr.append(res)
-                    else: res_arr.append(res)
+                    if res: res_arr.append("has-background-success has-text-primary-light has-text-weight-bold")
+                    else: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold")
 
+                # first two array elements are for table data: <td class=res_arr[:2]>, third is for arrow div: <div class=res_arr[2]>
                 case "<class 'int'>":
-                    if res==0: res_arr.append(0)
-                    elif res>0: res_arr.append(1)
-                    elif res<0: res_arr.append(-1)
+                    if res==0: res_arr.append("has-background-success has-text-primary-light has-text-weight-bold")
+
+                    elif res>0 and res>5: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold triangle_up")
+                    elif res>0 and res<5: res_arr.append("has-background-warning has-text-black-bis has-text-weight-bold triangle_up")
+
+                    elif res<0 and res>-5: res_arr.append("has-background-warning has-text-black-bis has-text-weight-bold triangle_down")
+                    elif res<0 and res<-5: res_arr.append("has-background-danger has-text-black-bis has-text-weight-bold triangle_down")
 
         return res_arr
-
-
 
 def read_players() -> list:
     with open("app/players.json", "r") as f:
