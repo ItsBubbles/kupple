@@ -64,6 +64,7 @@ class Player(BaseModel):
                 v = res_arr[i]
             except IndexError:
                 print(f"Index {i} is out of range for an array of length {len(res_arr)}...\nArray: {res_arr}")
+
             res_dict[k] = [v]
         print(res_dict)
         return res_dict
