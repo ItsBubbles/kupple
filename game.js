@@ -10,13 +10,13 @@ var app = Vue.createApp({
         addNewPlay(player){
             this.players.push(player)
         },
-        getColor(player){
-            if(player == "Tom Brady"){
-                return redResult
-            }
-            else{
-                return greenResult
-            }
+        getClass(player){
+            // if(player == "Tom Brady"){
+            //     return "redResult"
+            // }
+            // else{
+            //     return "greenResult"
+            // }
         }
     }
         
@@ -40,14 +40,16 @@ function userInput(playerId){
         .then(data =>{
             newData = JSON.parse(data)
             app.addNewPlay(newData.player)
+            // array of css classes
+            // need to iterate and assign classes to respective elements
             console.log(newData.results)
         })         
 }
 
 const searchStates = async searchText => {
     let matches = data[0].filter(player => {
-        const regex = new RegExp(`^${searchText}`, 'gi');
-        return player.name.match(regex) 
+        const regex = new RegExp(`${searchText}`, 'gi');
+        return player.name.match(regex)   
     });
     if(searchText.length === 0) {
         matches = []
@@ -60,7 +62,6 @@ const outputHtml = matches => {
 
         const html = matches.map(match => `
             <button class=button id=${data[0].indexOf(match)} onClick=userInput(this.id)>${match.name}</button>
-            
             
         `).join('');
         match.innerHTML = html;
