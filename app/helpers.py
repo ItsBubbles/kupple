@@ -26,13 +26,9 @@ class Player(BaseModel):
         cmp_arr.append(int(answer.number) - int(self.number))
 
         res_arr = []
-        res_dict = {}
 
         for res in cmp_arr:
-            i = cmp_arr.index(res)
             type_ = f"{type(res)}"
-
-            print(type_)
 
             match type_:
                 case "<class 'bool'>":
@@ -48,10 +44,16 @@ class Player(BaseModel):
 
                     elif res<0 and res>-5: res_arr.append("has-background-warning has-text-black-bis has-text-weight-bold triangle_down")
                     elif res<0 and res<-5: res_arr.append("has-background-danger has-text-black-bis has-text-weight-bold triangle_down")
-        
-            res_dict[player_attr[i]] = [res_arr[i]]
 
-        print(res_arr)
+        res_dict = {}
+
+        for i in range(6):
+            k = player_attr[i]
+            print(k)
+            v = res_arr[i]
+            print(v)
+            res_dict[k] = [v]
+
         print(res_dict)
 
         return res_dict
