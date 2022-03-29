@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
     <link rel="stylesheet" href="styles.css">
     <title>Game</title>
 </head>
@@ -14,11 +15,30 @@
         <div>
             <input class="input is-centered field has-addons has-addons-centered" id="search" type="text" placeholder="Enter Player Name"> 
         </div>
-        <div id = "match" class = "block is-centered">
+        <div id="match" class="block is-centered">
         </div>
-        <div class = "tableDiv">
-        
-            
+        <div class="tableDiv">
+            <table class= "table table is-bordered" id="gameTable">
+                <tr id="tableHeader">
+                    <th id="playerName">Name</th>
+                    <th>Team</th>
+                    <th>Position</th>
+                    <th>Division</th>
+                    <th id="arrowClass">Age</th>
+                    <th id="arrowClass">Height</th>
+                    <th id="arrowClass">Number</th>
+                </tr>
+                <tr v-for="player in players" v-bind:id="players.indexOf(player)">
+                    <td id="playerName" v-bind:class="">{{player[0].name}}</td>
+                    <td v-bind:class="player[9]">{{player[0].team}}</td>
+                    <td v-bind:class="player[1]">{{player[0].pos}}</td>
+                    <td v-bind:class="player[2]">{{player[0].div}}</td>
+                    <td v-bind:class="player[3]" id="arrowClass">{{player[0].age}}<div v-bind:class="player[4]"></div></td>
+                    <td v-bind:class="player[5]" id="arrowClass">{{player[0].height}}<div v-bind:class="player[6]"></div></td>
+                    <td v-bind:class="player[7]" id="arrowClass">{{player[0].number}}<div v-bind:class="player[8]"></div></td>
+                </tr>
+    
+            </table>
         </div>
     </div>
     <script src="game.js"></script>

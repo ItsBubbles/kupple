@@ -9,7 +9,7 @@
     text-align: center;
     max-height: 200px;
     display: block;
-    overflow-y: scroll;;
+    overflow-y: scroll;
 }
 .button{
     display: block;
@@ -20,7 +20,45 @@
     display: flex;
     justify-content: center;
 }
-.gameTable{
-    width: 500px;
-    height: 600px;
+#tableHeader{
+    height: 50px;
 }
+#gameTable{
+    height: 100px;
+    border: 2px solid black;
+    text-align: center;
+}
+#playerName{
+    width: 150px;
+}
+
+#arrowClass{
+    width: 100px;
+    font-weight: bold;
+}
+.triangle_down{
+    position: relative;
+    top: -5px;
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-right: 0.2em solid black;
+    border-top: 0.2em solid black;
+    transform: rotate(135deg);
+    margin-right: 0.5em;
+    margin-left: 1.0em;
+  }
+.triangle_up{
+    position: relative;
+    top: 5px;
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-right: 0.2em solid black;
+    border-top: 0.2em solid black;
+    transform: rotate(-45deg);
+    margin-right: 0.5em;
+    margin-left: 1.0em;
+}   
