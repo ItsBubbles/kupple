@@ -49,7 +49,11 @@ class Player(BaseModel):
 
         for i in range(6):
             k = player_attr[i]
-            v = res_arr[i]
+            try:
+                v = res_arr[i]
+            except IndexError:
+                print(i)
+                print(len(res_arr))
             res_dict[k] = [v]
 
         print(res_dict)
