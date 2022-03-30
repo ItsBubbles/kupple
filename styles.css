@@ -31,9 +31,12 @@
     width: 150px;
     font-weight: bold;
 }
-
 #arrowClass{
     width: 100px;
+    font-weight: bold;
+}
+#heightClass{
+    width: 120px;
     font-weight: bold;
 }
 .triangle_down{

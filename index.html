@@ -25,7 +25,7 @@
                     <th>Position</th>
                     <th>Division</th>
                     <th id="arrowClass">Age</th>
-                    <th id="arrowClass">Height</th>
+                    <th id="heightClass">Height</th>
                     <th id="arrowClass">Number</th>
                 </tr>
                 <tr v-for="player in players" v-bind:id="players.indexOf(player)" id ="playerRows">
@@ -34,7 +34,7 @@
                     <td v-bind:class="player[1]">{{player[0].pos}}</td>
                     <td v-bind:class="player[2]">{{player[0].div}}</td>
                     <td v-bind:class="player[3]" id="arrowClass">{{player[0].age}}<div v-bind:class="player[4]"></div></td>
-                    <td v-bind:class="player[5]" id="arrowClass">{{(player[0].height / 12).toFixed(1)}}<div v-bind:class="player[6]"></div></td>
+                    <td v-bind:class="player[5]" id="heightClass">{{Math.floor(player[0].height / 12)}}' {{player[0].height - ((Math.floor(player[0].height / 12)) * 12)}}"<div v-bind:class="player[6]"></div></td>
                     <td v-bind:class="player[7]" id="arrowClass">{{player[0].number}}<div v-bind:class="player[8]"></div></td>
                 </tr>
     
