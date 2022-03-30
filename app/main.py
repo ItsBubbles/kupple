@@ -5,7 +5,7 @@ from fastapi import HTTPException, FastAPI, Response, Depends
 
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.verifier import SessionData, backend, cookie
+from app.verifier import SessionData, backend, cookie, verifier
 from app.helpers import Player, answer, random_player, read_players
 
 
@@ -59,3 +59,14 @@ async def create_session(name: str, response: Response):
     cookie.attach_to_response(response, session)
 
     return f"created session for {name}"
+
+
+@app.get("/whoami", dependencies=[Depends(cookie)])
+async def whoami(session_data: SessionData = Depends(verifier)):
+    return session_data
+
+@app.post("/delete_session")
+async def del_session(response: Response, session_id: UUID = Depends(cookie)):
+    await backend.delete(session_id)
+    cookie.delete_from_response(response)
+    return "deleted session"
