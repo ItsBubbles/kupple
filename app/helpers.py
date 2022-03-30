@@ -1,8 +1,9 @@
-from collections import namedtuple
 import json
 import random
 
 from pydantic import BaseModel
+from collections import namedtuple
+
 
 class Player(BaseModel):
     name: str
