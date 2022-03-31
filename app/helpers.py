@@ -1,8 +1,9 @@
-from collections import namedtuple
 import json
 import random
 
 from pydantic import BaseModel
+from collections import namedtuple
+
 
 class Player(BaseModel):
     name: str
@@ -15,6 +16,9 @@ class Player(BaseModel):
     conf: str
     
     def compare_(self, answer) -> dict:
+        if self == answer:
+            return 1
+        
         cmp_arr = []
         player_attr = ["posClass", "confClass", "divClass", "ageClass", "heightClass", "numberClass", "nameClass", "teamClass"]
         # go through each attribute used for comparison (Team, Div, Pos, Ht, Age, Jersey#)
@@ -80,5 +84,3 @@ def random_player() -> Player:
     player = random.choice(players)
     player = namedtuple("Player", player.keys())(*player.values())
     return player
-
-answer = random_player()
