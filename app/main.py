@@ -53,7 +53,7 @@ async def compare_player_route(player: Player, session_data: SessionData = Depen
 async def create_session(user_ip: str, response: Response):
     sessions = [s.user_ip for s in list(backend.data.values())]
     if user_ip in sessions:
-        return "session already exists!"
+        return 0
         
     answer = random_player()
 
@@ -69,7 +69,7 @@ async def create_session(user_ip: str, response: Response):
     cookie.attach_to_response(response, session)
     
     # return f"created session for {user_ip} \n answer for user -> {answer}"
-    return data.user_ip
+    return 201
 
 
 @app.post("/delete_session")
