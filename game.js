@@ -23,7 +23,6 @@ var app = Vue.createApp({
     },
     methods: {
     addNewPlay(player, playerResults){
-        console.log(playerResults)
         let playerClass = []
         playerClass.push(player)
         playerClass.push(playerResults.posClass)
