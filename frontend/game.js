@@ -24,60 +24,77 @@ var app = Vue.createApp({
     methods: {
     addNewPlay(player, playerResults){
         let playerClass = []
-        playerClass.push(player)
-        playerClass.push(playerResults.posClass)
-        playerClass.push(playerResults.divClass)
-        
-        // playerClass.push(player)
-        // playerClass.push(playerResults)
-
-        let ageArrowString = playerResults.ageClass[0]
-        let ageArrowIndex = ageArrowString.lastIndexOf(" ")
-        let ageArrow = ageArrowString.split(" ").pop()
-        let ageArrowSubClass = ageArrowString.substring(0, ageArrowIndex)
-
-
-        let heightArrowString = playerResults.heightClass[0]
-        let heightArrowIndex = heightArrowString.lastIndexOf(" ")
-        let heightArrow = heightArrowString.split(" ").pop()
-        let heightArrowSubClass = heightArrowString.substring(0, heightArrowIndex)
-
-        let numberArrowString = playerResults.numberClass[0]
-        let numberArrowIndex = numberArrowString.lastIndexOf(" ")
-        let numberArrow = numberArrowString.split(" ").pop()
-        let numberArrowSubClass = numberArrowString.substring(0, heightArrowIndex)
-        
-        
-        playerClass.push(ageArrowSubClass)
-        if (ageArrow == "triangle_up" || ageArrow == "triangle_down"){
-            playerClass.push(ageArrow)
-        }
+        if(playerResults == 1)
+            {
+                playerClass.push(player)
+                playerClass.push("has-background-success has-text-primary-light has-text-weight-bold")
+                playerClass.push("has-background-success has-text-primary-light has-text-weight-bold")
+                playerClass.push("has-background-success has-text-primary-light has-text-weight-bold")
+                playerClass.push("")
+                playerClass.push("has-background-success has-text-primary-light has-text-weight-bold")
+                playerClass.push("")
+                playerClass.push("has-background-success has-text-primary-light has-text-weight-bold")
+                playerClass.push("")
+                playerClass.push("has-background-success has-text-primary-light has-text-weight-bold")
+                this.players.push(playerClass)
+            }
         else{
-            playerClass.push("")
-        }
+            
+            playerClass.push(player)
+            playerClass.push(playerResults.posClass)
+            playerClass.push(playerResults.divClass)
+            
+            // playerClass.push(player)
+            // playerClass.push(playerResults)
 
-        playerClass.push(heightArrowSubClass)
-        if(heightArrow == "triangle_up" || heightArrow == "triangle_down"){
-            playerClass.push(heightArrow)
-        }
-        else{
-            playerClass.push("")
-        }
-        playerClass.push(numberArrowSubClass)
-        if(numberArrow == "triangle_up" || numberArrow == "triangle_down"){
-            playerClass.push(numberArrow)
-        }
-        else{
-            playerClass.push("")
-        }
-        playerClass.push(playerResults.teamClass)
+            let ageArrowString = playerResults.ageClass[0]
+            let ageArrowIndex = ageArrowString.lastIndexOf(" ")
+            let ageArrow = ageArrowString.split(" ").pop()
+            let ageArrowSubClass = ageArrowString.substring(0, ageArrowIndex)
 
 
-        
-        // console.log(playerResults.ageClass[0])
-        this.players.push(playerClass)
-        
-    },
+            let heightArrowString = playerResults.heightClass[0]
+            let heightArrowIndex = heightArrowString.lastIndexOf(" ")
+            let heightArrow = heightArrowString.split(" ").pop()
+            let heightArrowSubClass = heightArrowString.substring(0, heightArrowIndex)
+
+            let numberArrowString = playerResults.numberClass[0]
+            let numberArrowIndex = numberArrowString.lastIndexOf(" ")
+            let numberArrow = numberArrowString.split(" ").pop()
+            let numberArrowSubClass = numberArrowString.substring(0, heightArrowIndex)
+            
+            
+            playerClass.push(ageArrowSubClass)
+            if (ageArrow == "triangle_up" || ageArrow == "triangle_down"){
+                playerClass.push(ageArrow)
+            }
+            else{
+                playerClass.push("")
+            }
+
+            playerClass.push(heightArrowSubClass)
+            if(heightArrow == "triangle_up" || heightArrow == "triangle_down"){
+                playerClass.push(heightArrow)
+            }
+            else{
+                playerClass.push("")
+            }
+            playerClass.push(numberArrowSubClass)
+            if(numberArrow == "triangle_up" || numberArrow == "triangle_down"){
+                playerClass.push(numberArrow)
+            }
+            else{
+                playerClass.push("")
+            }
+            playerClass.push(playerResults.teamClass)
+
+
+            
+            // console.log(playerResults.ageClass[0])
+            this.players.push(playerClass)
+            
+        }
+    }
     }
 }).mount('.tableDiv')
 
