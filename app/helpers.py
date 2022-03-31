@@ -81,5 +81,3 @@ def random_player() -> Player:
     player = random.choice(players)
     player = namedtuple("Player", player.keys())(*player.values())
     return player
-
-answer = random_player()

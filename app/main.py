@@ -6,7 +6,7 @@ from fastapi import HTTPException, FastAPI, Response, Depends
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.session import SessionData, backend, cookie, verifier
-from app.helpers import Player, answer, random_player, read_players
+from app.helpers import Player, random_player, read_players
 
 
 origins = [
@@ -24,7 +24,7 @@ app.add_middleware(
 )
 
 # temporary until "sessions" (cookies?) are implemeneted
-print(f"The current global answer to the puzzle is {answer}!")
+
 
 
 @app.get("/")
@@ -56,7 +56,7 @@ async def create_session(user_ip: str, response: Response):
         return 0
         
     answer = random_player()
-
+    print(f"The current global answer to the puzzle is {answer}!")
     session = uuid4()
     data = SessionData(
                     user_ip=user_ip, 
@@ -68,7 +68,7 @@ async def create_session(user_ip: str, response: Response):
     cookie.attach_to_response(response, session)
     
     # return f"created session for {user_ip} \n answer for user -> {answer}"
-    return 201
+    return 201, session
 
 
 @app.post("/delete_session")
