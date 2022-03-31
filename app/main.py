@@ -62,7 +62,6 @@ async def create_session(user_ip: str, response: Response):
                     user_ip=user_ip, 
                     answer=answer._asdict()
                 )
-
     
     await backend.create(session, data)
 
