@@ -1,2 +1,5 @@
 # kupple
-This game is inspired off of weddlegame.com. We wanted to keep playing after the daily puzzle, so we decided to build off of their concept.
+This game is inspired off of [weddle](https://www.weddlegame.com). 
+
+
+We enjoyed the concept of the game so much and wanted to keep playing after the daily puzzle that we decided to build off of their concept.
