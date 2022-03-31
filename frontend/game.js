@@ -61,7 +61,7 @@ var app = Vue.createApp({
             let numberArrowString = playerResults.numberClass[0]
             let numberArrowIndex = numberArrowString.lastIndexOf(" ")
             let numberArrow = numberArrowString.split(" ").pop()
-            let numberArrowSubClass = numberArrowString.substring(0, heightArrowIndex)
+            let numberArrowSubClass = numberArrowString.substring(0, numberArrowIndex)
             
             
             playerClass.push(ageArrowSubClass)
