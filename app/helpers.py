@@ -75,7 +75,7 @@ class Player(BaseModel):
 
 
 def read_players() -> list:
-    with open("app/players.json", "r") as f:
+    with open("data/players.json", "r") as f:
         return json.load(f)
 
 players = read_players()
