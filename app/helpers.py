@@ -16,6 +16,9 @@ class Player(BaseModel):
     conf: str
     
     def compare_(self, answer) -> dict:
+        if self == answer:
+            return 1
+        
         cmp_arr = []
         player_attr = ["posClass", "confClass", "divClass", "ageClass", "heightClass", "numberClass", "nameClass", "teamClass"]
         # go through each attribute used for comparison (Team, Div, Pos, Ht, Age, Jersey#)
