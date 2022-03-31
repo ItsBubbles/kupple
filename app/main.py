@@ -5,7 +5,7 @@ from fastapi import HTTPException, FastAPI, Response, Depends
 
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.verifier import SessionData, backend, cookie, verifier
+from app.session import SessionData, backend, cookie, verifier
 from app.helpers import Player, answer, random_player, read_players
 
 
@@ -31,17 +31,17 @@ print(f"The current global answer to the puzzle is {answer}!")
 async def get_players_route():
     return read_players()
 
-# secret
-@app.get("/answer")
-async def random_player_route():
-    return random_player()
+
+@app.get("/whoami", dependencies=[Depends(cookie)])
+async def whoami(session_data: SessionData = Depends(verifier)):
+    return {"user_ip": session_data.user_ip}
 
 # route to compare player objects
-@app.post("/compare")
-async def compare_player_route(player: Player):
+@app.post("/compare", dependencies=[Depends(cookie)])
+async def compare_player_route(player: Player, session_data: SessionData = Depends(verifier)):
     # passing 'answer' from helpers, will be refactored to an individual's session
     
-    results = player.compare_(answer)
+    results = player.compare_(session_data.answer)
     returnDict = {
         "results": results,
         "player": player
@@ -49,21 +49,28 @@ async def compare_player_route(player: Player):
     return returnDict
 
 # route to session the user
-@app.post("/create_session/{name}")
-async def create_session(name: str, response: Response):
+@app.post("/create_session/{user_ip}")
+async def create_session(user_ip: str, response: Response):
+    sessions = [s.user_ip for s in list(backend.data.values())]
+    if user_ip in sessions:
+        return "session already exists!"
+        
+    answer = random_player()
 
     session = uuid4()
-    data = SessionData(username=name)
+    data = SessionData(
+                    user_ip=user_ip, 
+                    answer=answer._asdict()
+                )
 
+    
     await backend.create(session, data)
+
     cookie.attach_to_response(response, session)
+    
+    # return f"created session for {user_ip} \n answer for user -> {answer}"
+    return data.user_ip
 
-    return f"created session for {name}"
-
-
-@app.get("/whoami", dependencies=[Depends(cookie)])
-async def whoami(session_data: SessionData = Depends(verifier)):
-    return session_data
 
 @app.post("/delete_session")
 async def del_session(response: Response, session_id: UUID = Depends(cookie)):
