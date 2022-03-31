@@ -44,7 +44,7 @@ class Player(BaseModel):
                         conf_bool = cmp_arr[1]
                         if not conf_bool: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold")
                         elif conf_bool and not res: res_arr.append("has-background-warning has-text-black-bis has-text-weight-bold")
-                        else: res_arr.append("C")
+                        else: res_arr.append("has-background-success has-text-primary-light has-text-weight-bold")
 
                 # first 3 array elements are for table data: <td class=res_arr[:3]>, third is for arrow div: <div class=res_arr[3]>
                 case "<class 'int'>":
