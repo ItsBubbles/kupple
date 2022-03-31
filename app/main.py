@@ -23,10 +23,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# temporary until "sessions" (cookies?) are implemeneted
-
-
-
 @app.get("/")
 async def get_players_route():
     return read_players()
@@ -35,6 +31,12 @@ async def get_players_route():
 @app.get("/whoami", dependencies=[Depends(cookie)])
 async def whoami(session_data: SessionData = Depends(verifier)):
     return {"user_ip": session_data.user_ip}
+
+
+@app.get("/new", dependencies=[Depends(cookie)])
+async def new_game(session_data: SessionData = Depends(verifier)):
+    session_data.answer = random_player()
+    return 1
 
 # route to compare player objects
 @app.post("/compare", dependencies=[Depends(cookie)])
