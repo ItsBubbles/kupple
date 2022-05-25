@@ -29,8 +29,23 @@ var app = Vue.createApp({
     methods: {
     addNewPlay(player, playerResults){
         let playerClass = []
+        console.log(playerResults)
         if(playerResults == 1)
             {
+                //Make Pop up to start new game
+                
+
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+                myHeaders.append("tkn", localStorage.getItem("tkn"))
+                var requestOptions = {
+                    method: 'GET',
+                    headers: myHeaders,
+                    redirect: 'follow',
+                    credentials:'include'
+                    };
+                fetch('http://127.0.0.1:8000/new_game', requestOptions)
+
                 playerClass.push(player)
                 playerClass.push("has-background-success has-text-primary-light has-text-weight-bold")
                 playerClass.push("has-background-success has-text-primary-light has-text-weight-bold")
