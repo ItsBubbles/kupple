@@ -4,7 +4,6 @@ import random
 from pydantic import BaseModel
 from collections import namedtuple
 
-
 class Player(BaseModel):
     name: str
     pos: str

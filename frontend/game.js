@@ -1,23 +1,10 @@
 const search = document.getElementById('search');
 const match = document.getElementById('match');
 
-// $.getJSON("https://api.myip.com", async function(data, _callback) {
-// // Display the visitor's IP in the console
-//     var myHeaders = new Headers();
-//     myHeaders.append("Content-Type", "application/json");
-
-//     var requestOptions = {
-//         method: 'POST',
-//         headers: myHeaders,
-//         redirect: 'follow',
-//         credentials:'include'
-//         };
-//     await fetch("http://127.0.0.1:8000/create_session/" + data.ip, requestOptions)
-//         .then(response => response.json())
-// });
 const userAction = async () => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("tkn", localStorage.getItem("tkn"))
 
     var requestOptions = {
         method: 'POST',
@@ -25,10 +12,10 @@ const userAction = async () => {
         redirect: 'follow',
         credentials:'include'
         };
-    if (localStorage.getItem('key')==null){
-        localStorage.setItem('key', Math.random().toString(36).substr(2))
+    if (localStorage.getItem('tkn')==null){
+        localStorage.setItem('tkn', Math.random().toString(36).substr(2))
     }
-    await fetch('http://127.0.0.1:8000/create_session/' + localStorage.getItem('key'), requestOptions)
+    await fetch('http://127.0.0.1:8000/init_session', requestOptions)
         .then(response => response.json())
         .then(console.log)
   }
@@ -119,6 +106,7 @@ var guess;
 async function userInput(playerId){ 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("tkn", localStorage.getItem("tkn"))
 
     var requestOptions = {
         method: 'POST',
