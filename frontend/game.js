@@ -1,10 +1,10 @@
 const search = document.getElementById('search');
 const match = document.getElementById('match');
 
-$.getJSON("https://api.myip.com", async function(data, _callback) {
-// Display the visitor's IP in the console
+const userAction = async () => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("tkn", localStorage.getItem("tkn"))
 
     var requestOptions = {
         method: 'POST',
@@ -12,9 +12,14 @@ $.getJSON("https://api.myip.com", async function(data, _callback) {
         redirect: 'follow',
         credentials:'include'
         };
-    await fetch("http://127.0.0.1:8000/create_session/" + data.ip, requestOptions)
+    if (localStorage.getItem('tkn')==null){
+        localStorage.setItem('tkn', Math.random().toString(36).substr(2))
+    }
+    await fetch('http://127.0.0.1:8000/init_session', requestOptions)
         .then(response => response.json())
-});
+        .then(console.log)
+  }
+userAction()
 var app = Vue.createApp({
     data(){
         return {
@@ -87,9 +92,6 @@ var app = Vue.createApp({
                 playerClass.push("")
             }
             playerClass.push(playerResults.teamClass)
-
-
-            
             // console.log(playerResults.ageClass[0])
             this.players.push(playerClass)
             
@@ -104,7 +106,8 @@ var guess;
 async function userInput(playerId){ 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Cookie", "cookie="+document.cookie);
+    myHeaders.append("tkn", localStorage.getItem("tkn"))
+
     var requestOptions = {
         method: 'POST',
         headers: myHeaders,
@@ -151,8 +154,6 @@ function get_player_data(json) {
     data.push(json)
     return
 }
-
-
 fetch("http://127.0.0.1:8000/")
     .then(response => response.json())
     .then(json => get_player_data(json))
