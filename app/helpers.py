@@ -14,8 +14,9 @@ class Player(BaseModel):
     div: str
     conf: str
     
-    def compare_(self, answer) -> dict:
-        if self == answer:
+    def compare_(self, answer) -> dict | int:
+        if dict(self) == answer._asdict():
+            print("W")
             return 1
         
         cmp_arr = []
