@@ -38,26 +38,46 @@ class Player(BaseModel):
         for res in cmp_arr:
             type_ = f"{type(res)}"
 
-            match type_:
-                case "<class 'bool'>":
-                    if i != 2:
-                        if res: res_arr.append("has-background-success has-text-primary-light has-text-weight-bold")
-                        else: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold")
-                    else:
-                        conf_bool = cmp_arr[1]
-                        if not conf_bool: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold")
-                        elif conf_bool and not res: res_arr.append("has-background-warning has-text-black-bis has-text-weight-bold")
-                        else: res_arr.append("has-background-success has-text-primary-light has-text-weight-bold")
+            if type_ == "<class 'bool'>":
+                if i != 2:
+                    if res: res_arr.append("has-background-success has-text-primary-light has-text-weight-bold")
+                    else: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold")
+                else:
+                    conf_bool = cmp_arr[1]
+                    if not conf_bool: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold")
+                    elif conf_bool and not res: res_arr.append("has-background-warning has-text-black-bis has-text-weight-bold")
+                    else: res_arr.append("has-background-success has-text-primary-light has-text-weight-bold")
+            elif type_ == "<class 'int'>":
+                if res==0: res_arr.append("has-background-success has-text-primary-light has-text-weight-bold")
 
-                # first 3 array elements are for table data: <td class=res_arr[:3]>, third is for arrow div: <div class=res_arr[3]>
-                case "<class 'int'>":
-                    if res==0: res_arr.append("has-background-success has-text-primary-light has-text-weight-bold")
+                elif res>0 and res>=5: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold triangle_up")
+                elif res>0 and res<5: res_arr.append("has-background-warning has-text-black-bis has-text-weight-bold triangle_up")
 
-                    elif res>0 and res>=5: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold triangle_up")
-                    elif res>0 and res<5: res_arr.append("has-background-warning has-text-black-bis has-text-weight-bold triangle_up")
+                elif res<0 and res>-5: res_arr.append("has-background-warning has-text-black-bis has-text-weight-bold triangle_down")
+                elif res<0 and res<=-5: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold triangle_down")
 
-                    elif res<0 and res>-5: res_arr.append("has-background-warning has-text-black-bis has-text-weight-bold triangle_down")
-                    elif res<0 and res<=-5: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold triangle_down")
+
+            # match type_:
+            #     case "<class 'bool'>":
+            #         if i != 2:
+            #             if res: res_arr.append("has-background-success has-text-primary-light has-text-weight-bold")
+            #             else: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold")
+            #         else:
+            #             conf_bool = cmp_arr[1]
+            #             if not conf_bool: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold")
+            #             elif conf_bool and not res: res_arr.append("has-background-warning has-text-black-bis has-text-weight-bold")
+            #             else: res_arr.append("has-background-success has-text-primary-light has-text-weight-bold")
+
+            #     # first 3 array elements are for table data: <td class=res_arr[:3]>, third is for arrow div: <div class=res_arr[3]>
+            #     case "<class 'int'>":
+            #         if res==0: res_arr.append("has-background-success has-text-primary-light has-text-weight-bold")
+
+            #         elif res>0 and res>=5: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold triangle_up")
+            #         elif res>0 and res<5: res_arr.append("has-background-warning has-text-black-bis has-text-weight-bold triangle_up")
+
+            #         elif res<0 and res>-5: res_arr.append("has-background-warning has-text-black-bis has-text-weight-bold triangle_down")
+            #         elif res<0 and res<=-5: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold triangle_down")
+            
             i+=1
         res_dict = {}
 

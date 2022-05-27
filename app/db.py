@@ -20,6 +20,8 @@ def db_query(query: str, conn: Connection, commit: bool=False):
 
 def init_session(tkn: str):
     """Queries database by tkn. Returns tuple of user answer and counter for the current session."""
+    counter = counter_check(tkn, query=True)
+    
     def create_user(tkn: str):
         answer = random_player()
 
@@ -27,7 +29,6 @@ def init_session(tkn: str):
         try:
             db_query(query=query, conn=init_db(), commit=True)
             return {"answer": answer._asdict(), "counter": 0}
-
 
         except sqlite3.IntegrityError:
             return 409
@@ -37,33 +38,42 @@ def init_session(tkn: str):
         
         res = db_query(query=query, conn=init_db())
 
-        if res: return {"answer": loads(list(res)[0][0]), "counter": res[0][1]}
+        if res: 
+            counter = res[0][1]
+            if counter != None: return {"answer": loads(list(res)[0][0]),"counter": counter}
         return 0
     
-    if user_exists(tkn): return user_exists(tkn)
+    if user_exists(tkn): 
+        if counter is None: return new_game(tkn)
+        return user_exists(tkn)
     
     return create_user(tkn=tkn)
 
 
-def counter_check(tkn: str):
+def counter_check(tkn: str, query=False):
     query_check = f"select counter from user_data where tkn='{tkn}';"
     
     counter = db_query(query=query_check, conn=init_db())[0][0]
 
+    if query: return counter
+
     if counter <= 7:
         query_update = f"update user_data set counter=counter+1 where tkn='{tkn}';"
-        db_query(query=query_update, conn=init_db())
+        db_query(query=query_update, conn=init_db(), commit=True)
         return counter+1
     
+    elif counter > 8:
+        return 8
+
     else:
-        return None
+        return counter
     
 
 def new_game(tkn: str):
     answer = random_player()
     query = f"update user_data set answer='{dumps(answer._asdict())}', counter=0 where tkn='{tkn}';"
     db_query(query=query, conn=init_db(), commit=True)
-    return {"answer": answer._asdict(), "counter": 0}
+    return {"counter": 0}
 
 
 def close_db(conn: Connection):

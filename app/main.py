@@ -7,6 +7,9 @@ from app.db import init_session, counter_check, new_game
 
 from app.helpers import Player, read_players
 
+from mangum import Mangum
+
+
 origins = [
     "http://127.0.0.1:5500"
 ]
@@ -21,6 +24,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+handler = Mangum(app)
+
 @app.get("/")
 async def get_players_route():
     return read_players()
@@ -30,20 +35,21 @@ async def get_players_route():
 @app.post("/compare")
 async def compare_player_route(player: Player, tkn: Optional[str]=Header(None)):
     counter = counter_check(tkn)
-    if counter is None: new_game(tkn); return {"results": 403, "player": None}
+
+    if counter == 8: return {"results": counter, "player": None, "counter": counter}
 
     answer = init_session(tkn)["answer"]
     answer = namedtuple("Player", answer.keys())(*answer.values())
 
     results = player.compare_(answer)
-    return {"results": results, "player": player}
+    return {"results": results, "player": player, "counter": counter}
 
 
 # route to session the user
 @app.post("/init_session")
 def init_session_route(tkn: Optional[str]=Header(None)):
-    return init_session(tkn)
-
+    counter = init_session(tkn)["counter"]
+    return {"counter": counter}
 
 @app.get("/new_game")
 def new_game_route(tkn: Optional[str]=Header(None)): 
