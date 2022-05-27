@@ -27,7 +27,8 @@ var app = Vue.createApp({
     data(){
         return {
             players: [],
-            answers: []
+            answers: [],
+            results:[]
         }
     },
     methods: {
@@ -49,10 +50,14 @@ var app = Vue.createApp({
 
                 this.answers.push(player)
 
+                this.results.push("You Win!")
+
+
                 document.getElementById("overlayDiv").classList.add("is-active")
                 document.getElementById("search").disabled= true;
                 document.getElementById('search').value = ''
                 document.getElementById("match").remove()
+
             }
             else
             {
@@ -104,7 +109,17 @@ var app = Vue.createApp({
                     playerClass.push("")
                 }
                 playerClass.push(playerResults.teamClass)
-                this.players.push(playerClass)            
+                this.players.push(playerClass)   
+                
+                if (playerResults == 8){
+                    this.answers.push(player)
+                    this.results.push("You Lose!")
+
+                    document.getElementById("overlayDiv").classList.add("is-active")
+                    document.getElementById("search").disabled= true;
+                    document.getElementById('search').value = ''
+                    document.getElementById("match").remove()
+                }
         }
     }
     }

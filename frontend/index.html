@@ -54,10 +54,12 @@
                     </div>
                 </div>
             </div>
+
             <div class="modal" id="overlayDiv">
                 <div class="modal-background">
                     <div class="modal-content" v-for="answer in answers">
                         <div class="box has-text-centered">
+                            <h1>{{ results[0] }}</h1>
                             <h1>{{ answer.name }} {{answer.pos}}</h1>
                             <button class="button" onclick="resetGame()">New Game</button>
                         </div>

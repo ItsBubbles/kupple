@@ -7,7 +7,7 @@ from app.db import init_session, counter_check, new_game
 
 from app.helpers import Player, read_players
 
-from mangum import Mangum
+# from mangum import Mangum
 
 
 origins = [
@@ -24,7 +24,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-handler = Mangum(app)
+# handler = Mangum(app)
 
 @app.get("/")
 async def get_players_route():
