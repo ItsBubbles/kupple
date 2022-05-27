@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="modal.js"></script>
     <script src="https://unpkg.com/vue@3"></script>
     <link rel="stylesheet" href="styles.css">
     <title>Game</title>
@@ -18,30 +19,53 @@
         </div>
         <div id="match" class="block is-centered">
         </div>
-        <div class="tableDiv">
-            <table class= "table table is-bordered" id="gameTable">
-                <tr id="tableHeader">
-                    <th id="playerName">Name</th>
-                    <th>Team</th>
-                    <th>Position</th>
-                    <th>Division</th>
-                    <th id="arrowClass">Age</th>
-                    <th id="heightClass">Height</th>
-                    <th id="arrowClass">Number</th>
-                </tr>
-                <tr v-for="player in players" v-bind:id="players.indexOf(player)" id ="playerRows">
-                    <td id="playerName" v-bind:class="">{{player[0].name}}</td>
-                    <td v-bind:class="player[9]">{{player[0].team}}</td>
-                    <td v-bind:class="player[1]">{{player[0].pos}}</td>
-                    <td v-bind:class="player[2]">{{player[0].div}}</td>
-                    <td v-bind:class="player[3]" id="arrowClass">{{player[0].age}}<div v-bind:class="player[4]"></div></td>
-                    <td v-bind:class="player[5]" id="heightClass">{{Math.floor(player[0].height / 12)}}' {{player[0].height - ((Math.floor(player[0].height / 12)) * 12)}}"<div v-bind:class="player[6]"></div></td>
-                    <td v-bind:class="player[7]" id="arrowClass">{{player[0].number}}<div v-bind:class="player[8]"></div></td>
-                </tr>
-    
-            </table>
+        <br>
+        <div class ="gameData">
+            <div class="tableDiv">
+                <table class= "table table is-bordered" id="gameTable">
+                    <tr id="tableHeader">
+                        <th id="playerName">Name</th>
+                        <th>Team</th>
+                        <th>Position</th>
+                        <th>Division</th>
+                        <th id="arrowClass">Age</th>
+                        <th id="heightClass">Height</th>
+                        <th id="arrowClass">Number</th>
+                    </tr>
+                    <tr v-for="player in players" v-bind:id="players.indexOf(player)" id ="playerRows">
+                        <td id="playerName" v-bind:class="">{{player[0].name}}</td>
+                        <td v-bind:class="player[9]">{{player[0].team}}</td>
+                        <td v-bind:class="player[1]">{{player[0].pos}}</td>
+                        <td v-bind:class="player[2]">{{player[0].div}}</td>
+                        <td v-bind:class="player[3]" id="arrowClass">{{player[0].age}}<div v-bind:class="player[4]"></div></td>
+                        <td v-bind:class="player[5]" id="heightClass">{{Math.floor(player[0].height / 12)}}' {{player[0].height - ((Math.floor(player[0].height / 12)) * 12)}}"<div v-bind:class="player[6]"></div></td>
+                        <td v-bind:class="player[7]" id="arrowClass">{{player[0].number}}<div v-bind:class="player[8]"></div></td>
+                    </tr>
+                </table>
+            </div>
+            <button class="button js-modal-trigger" data-target="statsTrigger" id="statsButton">Stats</button>
+            <div class="modal" id="statsTrigger">
+                <div class="modal-background">
+                    <div class="modal-content">
+                        <div class="box has-text-centered">
+                            <button class="button" onclick="resetGame()">New Game</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" id="overlayDiv">
+                <div class="modal-background">
+                    <div class="modal-content" v-for="answer in answers">
+                        <div class="box has-text-centered">
+                            <h1>{{ answer.name }} {{answer.pos}}</h1>
+                            <button class="button" onclick="resetGame()">New Game</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    
     <script src="game.js"></script>
 </body>
 </html>

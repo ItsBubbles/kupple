@@ -16,8 +16,8 @@ class Player(BaseModel):
     
     def compare_(self, answer) -> dict | int:
         if dict(self) == answer._asdict():
-            print("W")
             return 1
+        print(answer)
         
         cmp_arr = []
         player_attr = ["posClass", "confClass", "divClass", "ageClass", "heightClass", "numberClass", "nameClass", "teamClass"]
