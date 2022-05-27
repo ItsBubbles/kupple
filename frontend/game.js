@@ -1,6 +1,9 @@
 const search = document.getElementById('search');
 const match = document.getElementById('match');
 
+var data = [];
+var guess;
+
 const userAction = async () => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -24,28 +27,14 @@ var app = Vue.createApp({
     data(){
         return {
             players: [],
+            answers: []
         }
     },
     methods: {
     addNewPlay(player, playerResults){
         let playerClass = []
-        console.log(playerResults)
         if(playerResults == 1)
             {
-                //Make Pop up to start new game
-                
-
-                var myHeaders = new Headers();
-                myHeaders.append("Content-Type", "application/json");
-                myHeaders.append("tkn", localStorage.getItem("tkn"))
-                var requestOptions = {
-                    method: 'GET',
-                    headers: myHeaders,
-                    redirect: 'follow',
-                    credentials:'include'
-                    };
-                fetch('http://127.0.0.1:8000/new_game', requestOptions)
-
                 playerClass.push(player)
                 playerClass.push("has-background-success has-text-primary-light has-text-weight-bold")
                 playerClass.push("has-background-success has-text-primary-light has-text-weight-bold")
@@ -57,66 +46,84 @@ var app = Vue.createApp({
                 playerClass.push("")
                 playerClass.push("has-background-success has-text-primary-light has-text-weight-bold")
                 this.players.push(playerClass)
-            }
-        else{
-            
-            playerClass.push(player)
-            playerClass.push(playerResults.posClass)
-            playerClass.push(playerResults.divClass)
-            
-            // playerClass.push(player)
-            // playerClass.push(playerResults)
 
-            let ageArrowString = playerResults.ageClass[0]
-            let ageArrowIndex = ageArrowString.lastIndexOf(" ")
-            let ageArrow = ageArrowString.split(" ").pop()
-            let ageArrowSubClass = ageArrowString.substring(0, ageArrowIndex)
+                this.answers.push(player)
 
-
-            let heightArrowString = playerResults.heightClass[0]
-            let heightArrowIndex = heightArrowString.lastIndexOf(" ")
-            let heightArrow = heightArrowString.split(" ").pop()
-            let heightArrowSubClass = heightArrowString.substring(0, heightArrowIndex)
-
-            let numberArrowString = playerResults.numberClass[0]
-            let numberArrowIndex = numberArrowString.lastIndexOf(" ")
-            let numberArrow = numberArrowString.split(" ").pop()
-            let numberArrowSubClass = numberArrowString.substring(0, numberArrowIndex)
+                document.getElementById("overlayDiv").classList.add("is-active")
+                document.getElementById("search").disabled= true;
+                document.getElementById('search').value = ''
+                document.getElementById("match").remove()
+            }
+            else
+            {
             
-            
-            playerClass.push(ageArrowSubClass)
-            if (ageArrow == "triangle_up" || ageArrow == "triangle_down"){
-                playerClass.push(ageArrow)
-            }
-            else{
-                playerClass.push("")
-            }
+                playerClass.push(player)
+                playerClass.push(playerResults.posClass)
+                playerClass.push(playerResults.divClass)
+                
+                // playerClass.push(player)
+                // playerClass.push(playerResults)
 
-            playerClass.push(heightArrowSubClass)
-            if(heightArrow == "triangle_up" || heightArrow == "triangle_down"){
-                playerClass.push(heightArrow)
-            }
-            else{
-                playerClass.push("")
-            }
-            playerClass.push(numberArrowSubClass)
-            if(numberArrow == "triangle_up" || numberArrow == "triangle_down"){
-                playerClass.push(numberArrow)
-            }
-            else{
-                playerClass.push("")
-            }
-            playerClass.push(playerResults.teamClass)
-            // console.log(playerResults.ageClass[0])
-            this.players.push(playerClass)
-            
+                let ageArrowString = playerResults.ageClass[0]
+                let ageArrowIndex = ageArrowString.lastIndexOf(" ")
+                let ageArrow = ageArrowString.split(" ").pop()
+                let ageArrowSubClass = ageArrowString.substring(0, ageArrowIndex)
+
+
+                let heightArrowString = playerResults.heightClass[0]
+                let heightArrowIndex = heightArrowString.lastIndexOf(" ")
+                let heightArrow = heightArrowString.split(" ").pop()
+                let heightArrowSubClass = heightArrowString.substring(0, heightArrowIndex)
+
+                let numberArrowString = playerResults.numberClass[0]
+                let numberArrowIndex = numberArrowString.lastIndexOf(" ")
+                let numberArrow = numberArrowString.split(" ").pop()
+                let numberArrowSubClass = numberArrowString.substring(0, numberArrowIndex)
+                
+                
+                playerClass.push(ageArrowSubClass)
+                if (ageArrow == "triangle_up" || ageArrow == "triangle_down"){
+                    playerClass.push(ageArrow)
+                }
+                else{
+                    playerClass.push("")
+                }
+
+                playerClass.push(heightArrowSubClass)
+                if(heightArrow == "triangle_up" || heightArrow == "triangle_down"){
+                    playerClass.push(heightArrow)
+                }
+                else{
+                    playerClass.push("")
+                }
+                playerClass.push(numberArrowSubClass)
+                if(numberArrow == "triangle_up" || numberArrow == "triangle_down"){
+                    playerClass.push(numberArrow)
+                }
+                else{
+                    playerClass.push("")
+                }
+                playerClass.push(playerResults.teamClass)
+                this.players.push(playerClass)            
         }
     }
     }
-}).mount('.tableDiv')
+}).mount('.gameData')
 
-var data = [];
-var guess;
+function resetGame(){
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("tkn", localStorage.getItem("tkn"))
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow',
+            credentials:'include'
+            };
+        fetch('http://127.0.0.1:8000/new_game', requestOptions)
+}
+
+
 
 async function userInput(playerId){ 
     var myHeaders = new Headers();
@@ -164,7 +171,6 @@ const outputHtml = matches => {
 
 search.addEventListener('input', () => searchStates(search.value));
 
-// takes in api call
 function get_player_data(json) {
     data.push(json)
     return

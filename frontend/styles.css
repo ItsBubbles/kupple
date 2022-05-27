@@ -65,3 +65,33 @@
     margin-right: 0.5em;
     margin-left: 1.0em;
 }   
+
+#statsButton{
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    border-radius: 30px;
+}
+/* .overlay{
+    
+    text-align: center;
+    position:fixed;
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+    height: 20%;
+    visibility: hidden;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 95%;
+} */
+/* .wrapper{
+    background-color: darkgrey;
+    padding: 20px;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+}  */
