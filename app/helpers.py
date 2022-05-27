@@ -14,7 +14,7 @@ class Player(BaseModel):
     div: str
     conf: str
     
-    def compare_(self, answer) -> dict | int:
+    def compare_(self, answer):
         if dict(self) == answer._asdict():
             return 1
         print(answer)
@@ -77,7 +77,7 @@ class Player(BaseModel):
 
             #         elif res<0 and res>-5: res_arr.append("has-background-warning has-text-black-bis has-text-weight-bold triangle_down")
             #         elif res<0 and res<=-5: res_arr.append("has-background-danger-dark has-text-primary-light has-text-weight-bold triangle_down")
-            
+
             i+=1
         res_dict = {}
 
