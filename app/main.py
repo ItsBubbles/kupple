@@ -7,9 +7,7 @@ from app.db import init_session, counter_check, new_game
 
 from app.helpers import Player, read_players
 
-# from mangum import Mangum
-
-
+# probably need to add front-end domain for CORS 
 origins = [
     "http://127.0.0.1:5500"
 ]
@@ -23,8 +21,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# handler = Mangum(app)
 
 @app.get("/")
 async def get_players_route():
