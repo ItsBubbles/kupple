@@ -15,7 +15,6 @@ db = mysql.connector.connect(
 )
 cursor = db.cursor(dictionary=True)
 
-
 def db_query(query: str, values, cursor):
     cursor.execute(query, values)
     res = list(cursor.fetchall())
@@ -35,8 +34,10 @@ def init_session(tkn: str):
 
         db_query(query=query,values=values, cursor=cursor)
 
+
         return {"answer": answer._asdict(), "counter": 0}
 
+   
 
     def user_exists(tkn) -> int | tuple:
         query = f"select answer, counter from user_data where tkn=%s"
@@ -58,13 +59,10 @@ def init_session(tkn: str):
 
 def counter_check(tkn: str):
     query_check = f"select counter from user_data where tkn=%s"
-    values = (tkn,)
-    counter = db_query(query_check,values=values, cursor=cursor)
+    values =(tkn,)
+    counter= db_query(query_check,values=values, cursor=cursor)
     if counter != None: counter = counter[0]["counter"]
 
-    # print(counter[0])
-    # if query: return counter
-    print(counter)
     if counter <= 8:
         query_update = f"update user_data set counter=counter+1 where tkn=%s"
         values = (tkn,)
@@ -84,3 +82,7 @@ def new_game(tkn: str):
     values = dumps(answer._asdict()), tkn
     db_query(query=query, values=values, cursor=cursor)
     return {"counter": 0}
+
+
+# def close_db(conn: Connection):
+#     conn.close()

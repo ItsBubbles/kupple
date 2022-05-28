@@ -43,6 +43,10 @@
                     </tr>
                 </table>
             </div>
+            <div class="has-text-centered is-size-2" v-for="answer in answers">
+                <h1>{{answer.name}} {{answer.pos}}</h1>
+            </div>
+                
             <br>
             <button class="button js-modal-trigger" data-target="statsTrigger" id="statsButton">Stats</button>
             <div class="modal" id="statsTrigger">

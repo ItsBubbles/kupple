@@ -32,7 +32,7 @@ var app = Vue.createApp({
         }
     },
     methods: {
-    addNewPlay(player, playerResults, counter){
+    addNewPlay(player, playerResults, counter, answer){
         let playerClass = []
         if(playerResults == 1)
             {
@@ -112,7 +112,8 @@ var app = Vue.createApp({
                 this.players.push(playerClass)   
                 
                 if (counter == 7){
-                    this.answers.push(player)
+                    this.answers.push(answer)
+                    console.log(answer)
                     this.results.push("You Lose!")
 
                     document.getElementById("overlayDiv").classList.add("is-active")
@@ -160,7 +161,7 @@ async function userInput(playerId){
     .then(response => response.text())         
     .then(data =>{
         newData = JSON.parse(data)
-        app.addNewPlay(newData.player, newData.results, newData.counter)
+        app.addNewPlay(newData.player, newData.results, newData.counter, newData.answer)
     })         
 }
 
