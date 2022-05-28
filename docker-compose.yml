@@ -1,0 +1,6 @@
+version: "3.10"
+services:
+  kupple-api:
+    build: .
+    ports:
+      - "8091:8091"

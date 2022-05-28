@@ -12,6 +12,7 @@ db = mysql.connector.connect(
     user="root",
     password ="root",
     database ="kupple"
+    port=3307
 )
 cursor = db.cursor(dictionary=True)
 
