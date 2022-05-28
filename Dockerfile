@@ -13,6 +13,6 @@ RUN pip install --no-cache-dir --upgrade -r /tmp/requirements.txt
 COPY ./app /code/app
 COPY ./data /code/data
 
-EXPOSE 80
+EXPOSE 8091
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8091"]
