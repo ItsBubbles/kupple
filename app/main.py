@@ -1,7 +1,10 @@
+from json import loads
 from typing import Optional
 from collections import namedtuple
 from fastapi import FastAPI, Header
 from fastapi.middleware.cors import CORSMiddleware
+
+from json import loads
 
 from app.db import init_session, counter_check, new_game
 
@@ -35,6 +38,7 @@ async def compare_player_route(player: Player, tkn: Optional[str]=Header(None)):
     if counter == 8: return {"results": counter, "player": None, "counter": counter}
 
     answer = init_session(tkn)["answer"]
+    answer= (loads(answer))
     answer = namedtuple("Player", answer.keys())(*answer.values())
 
     results = player.compare_(answer)
@@ -44,8 +48,10 @@ async def compare_player_route(player: Player, tkn: Optional[str]=Header(None)):
 # route to session the user
 @app.post("/init_session")
 def init_session_route(tkn: Optional[str]=Header(None)):
-    counter = init_session(tkn)["counter"]
-    return {"counter": counter}
+    # counter = init_session(tkn)
+    init_session(tkn)
+
+    # return {"counter": counter}
 
 @app.get("/new_game")
 def new_game_route(tkn: Optional[str]=Header(None)): 

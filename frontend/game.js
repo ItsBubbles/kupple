@@ -32,7 +32,7 @@ var app = Vue.createApp({
         }
     },
     methods: {
-    addNewPlay(player, playerResults){
+    addNewPlay(player, playerResults, counter){
         let playerClass = []
         if(playerResults == 1)
             {
@@ -111,7 +111,7 @@ var app = Vue.createApp({
                 playerClass.push(playerResults.teamClass)
                 this.players.push(playerClass)   
                 
-                if (playerResults == 8){
+                if (counter == 7){
                     this.answers.push(player)
                     this.results.push("You Lose!")
 
@@ -136,6 +136,8 @@ function resetGame(){
             credentials:'include'
             };
         fetch('http://127.0.0.1:8000/new_game', requestOptions)
+
+        window.location.reload()
 }
 
 
@@ -158,7 +160,7 @@ async function userInput(playerId){
     .then(response => response.text())         
     .then(data =>{
         newData = JSON.parse(data)
-        app.addNewPlay(newData.player, newData.results)
+        app.addNewPlay(newData.player, newData.results, newData.counter)
     })         
 }
 
