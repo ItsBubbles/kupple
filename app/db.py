@@ -8,7 +8,7 @@ from app.helpers import random_player
 
 
 db = mysql.connector.connect(
-    host="localhost",
+    host="kupple-db",
     user="root",
     password ="root",
     database ="kupple",
