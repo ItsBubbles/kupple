@@ -44,7 +44,7 @@
                 </table>
             </div>
             <div class="has-text-centered is-size-2" v-for="answer in answers">
-                <h1>{{answer.name}} {{answer.pos}}</h1>
+                <h1>{{answer.name}} {{answer.pos}} {{answer.team}}</h1>
             </div>
                 
             <br>
@@ -64,7 +64,7 @@
                     <div class="modal-content" v-for="answer in answers">
                         <div class="box has-text-centered">
                             <h1>{{ results[0] }}</h1>
-                            <h1>{{ answer.name }} {{answer.pos}}</h1>
+                            <h1>{{ answer.name }} {{answer.pos}} {{answer.team}}</h1>
                             <button class="button" onclick="resetGame()">New Game</button>
                         </div>
                     </div>
